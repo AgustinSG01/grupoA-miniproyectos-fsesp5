@@ -1,5 +1,3 @@
-
-
 function ToDo({title, id, completed}) {
   return (
     <div>

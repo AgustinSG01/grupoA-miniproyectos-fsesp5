@@ -5,12 +5,14 @@ import Button from "../Components/Button"
 function TodosPage() {
 
   const [todo, setTodo] = useState([])
-
+  function handleChange(event){
+    console.log(event)
+  }
 
   return (
     <div>
       <form>
-        <Input />
+        <Input handleChange={handleChange}/>
         <Button />
       </form>
     </div>
