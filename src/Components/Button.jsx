@@ -2,7 +2,7 @@
 
 function Button({ handleClick, text = 'Send' }) {
   return (
-    <button onClick = { handleClick }>{ text }</button>
+    <button type="submit">{ text }</button>
   )
 }
 
