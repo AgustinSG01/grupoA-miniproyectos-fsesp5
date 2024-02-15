@@ -1,16 +1,13 @@
 import { useState } from "react"
 import Input from "../Components/Input"
 import Button from "../Components/Button"
+import ToDo from "../Components/ToDo"
 
 function TodosPage() {
 
-  const [todo, setTodo] = useState([])
+  const [todos, setTodos] = useState([])
   
-  const [newtodo, setnewTodo] = useState({
-    titulo:"",
-    id:"",
-    checked:false,
-  })
+  
 
   const [inputEstado, setinputEstado]= useState("")
 
@@ -19,25 +16,35 @@ function TodosPage() {
   }
   function handleSubmit(e){
     e.preventDefault()
+   if (inputEstado) {
+        setTodos((prevTodos)=>[...prevTodos, {
+          
+          titulo:inputEstado,
+          id:Math.round(Math.random * 100000), 
+          checked:false,
+        
+      }])
+      setinputEstado("")
+   }else{
+    alert("input vacio")
+   }
     
-    setnewTodo((oldtoDo) => {
-      return {
-        titulo:inputEstado,
-        id:Math.round(Math.random * 100000), 
-        checked:false,
-      }
-      
-    })
-    setTodo([...todo, newtodo])
-    setinputEstado("")
-    alert("Usuario agregado")
+    
+    
+    console.log(todos)
   }
+
   return (
     <div>
       <form onSubmit={handleSubmit}>
         <Input handleChange={handleChange} value={inputEstado} placeholder={"Escribe aqui..."}/>
         <Button />
       </form>
+      <ul>
+        {
+          todos.map((tarea)=><li key={tarea.id}><ToDo title={tarea.titulo} completed={tarea.checked} id={tarea.id}/></li>)
+        }
+      </ul>
     </div>
   )
 }
